@@ -124,8 +124,8 @@ then
 
     python3 component/oai-hss/ci-scripts/generateConfigFiles.py --kind=HSS --cassandra=${Cassandra_IP} \
         --hss_s6a=${HSS_IP} --apn1=apn1.carrier.com --apn2=apn2.carrier.com \
-        --users=200 --imsi=505010100000001 \
-        --ltek=0c0a34601d4f07677303652c0462535b --op=63bfa50ee6523365ff14c1f45f88737d \
+        --users=200 --imsi=${MCC}${MNC}${ID} \
+        --ltek=00112233445566778899aabbccddeeff --op=01020304050607080910111213141516 \
         --nb_mmes=1 --from_docker_file
 
     docker cp ./hss-cfg.sh prod-oai-hss:/openair-hss/scripts
@@ -153,7 +153,7 @@ then
         --mme_s1c_IP=${MME_IP} --mme_s1c_name=eth0 \
         --mme_s10_IP=${MME_IP} --mme_s10_name=eth0 \
         --mme_s11_IP=${MME_IP} --mme_s11_name=eth0 --spgwc0_s11_IP=${SPGW0_IP} \
-        --mcc=505 --mnc=01 --tac_list="1" --from_docker_file
+        --mcc=${MCC} --mnc=${MNC} --tac_list="1" --from_docker_file
 
  	docker cp ./mme-cfg.sh prod-oai-mme:/openair-mme/scripts
     sleep 2
